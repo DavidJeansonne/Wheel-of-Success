@@ -1,6 +1,6 @@
 const qwerty = document.getElementById('qwerty');
 const phraseDiv = document.getElementById('phrase');
-const missed = 0;
+let missed = 0;
 
 const start = document.querySelector('.start');
 
@@ -36,7 +36,7 @@ function addPhraseToDisplay(arr) {
 }
 
 function checkLetter(button) {
-    const letterFound = null;
+    let letterFound = null;
     const letter = document.getElementsByClassName('letter');
     for (let i = 0; i < letter.length; i += 1) {
         if (letter[i].textContent.toLowerCase() === button.textContent) {
@@ -64,11 +64,11 @@ qwerty.addEventListener('click',(e) => {
         button.className = 'chosen';
         button.setAttribute('disabled', true);
         let letterFound = checkLetter(button);
-        if (letterFound === null ) {
-           const tries = document.querySelectorAll('.tries');
-            const lostLive = tries[missed].firstElementChild;
-            missed += 1;
-            lostLive.setAttribute('src', 'images/lostHeart.png');
-          }
+        if (letterFound === null) {
+           let tries = document.querySelectorAll('.tries');
+           let lostLive = tries[missed].firstElementChild;
+           lostLive.setAttribute('src', 'images/lostHeart.png');
+           missed = missed + 1;
+        }
     }
 });
