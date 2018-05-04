@@ -1,8 +1,10 @@
 const qwerty = document.getElementById('qwerty');
 const phraseDiv = document.getElementById('phrase');
 let missed = 0;
+const letter = document.getElementsByClassName('letter');
 
 const start = document.querySelector('.start');
+const resetButton = document.createElement('button');
 
 const phrases = [
     "Welcome To Wheel Of Success",
@@ -37,13 +39,43 @@ function addPhraseToDisplay(arr) {
 
 function checkLetter(button) {
     let letterFound = null;
-    const letter = document.getElementsByClassName('letter');
     for (let i = 0; i < letter.length; i += 1) {
         if (letter[i].textContent.toLowerCase() === button.textContent) {
            letter[i].classList.add('show');
+           letterFound = letter[i].textContent;
         } 
     }
+    if (letterFound === null) {
+        let tries = document.getElementsByClassName('tries');
+        let lostLive = tries[missed].firstElementChild;
+        lostLive.setAttribute('src', 'images/lostHeart.png');
+        missed = missed + 1;
+     }
     return letterFound;
+};
+
+function checkWin() {
+    const show = document.querySelectorAll('.show');
+     if (show.length === letter.length) {
+        overlay.className = 'win';
+        overlay.style.display = 'initial';
+        start.style.fontSize = '25px';
+        start.textContent = 'You Won!';    
+     } else if (missed >= 5) {
+        overlay.className = 'lose';
+        overlay.style.display = 'initial';
+        start.style.fontSize = '25px';
+        start.textContent = 'You Lost';
+     }  
+     reset();
+}
+
+function reset() {
+    resetButton.className = 'restart';
+    resetButton.textContent = 'Restart';
+    if (overlay.style.display === 'initial') {
+        overlay.append(resetButton);
+    }
 }
 
 
@@ -63,12 +95,11 @@ qwerty.addEventListener('click',(e) => {
         const button = e.target;
         button.className = 'chosen';
         button.setAttribute('disabled', true);
-        let letterFound = checkLetter(button);
-        if (letterFound === null) {
-           let tries = document.querySelectorAll('.tries');
-           let lostLive = tries[missed].firstElementChild;
-           lostLive.setAttribute('src', 'images/lostHeart.png');
-           missed = missed + 1;
-        }
+        let letterFound = checkLetter(button); 
     }
+    checkWin();
+});
+
+resetButton.addEventListener('click',(e) => {
+   const restart = document.location.href = '';
 });

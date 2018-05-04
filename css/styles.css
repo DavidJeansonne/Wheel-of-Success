@@ -92,6 +92,7 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  transition: all .8s ease-in;
 }
 
 .space {
@@ -124,7 +125,14 @@ button {
   border-radius: 5px;
   font-size: var(--font-size-medium);
 }
-
+.restart {
+  padding: 8px;
+  margin-left: 150px;
+  margin-top: 250px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  font-size: var(--font-size-medium);
+}
 /* Overlay */
 
 #overlay {
@@ -154,6 +162,7 @@ button {
 
 .win {
   background-color: var(--color-win);
+  font-size: 18px
 }
 
 .win a {
