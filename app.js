@@ -6,13 +6,7 @@ const letter = document.getElementsByClassName('letter');
 const start = document.querySelector('.start');
 const resetButton = document.createElement('button');
 
-const phrases = [
-    "Welcome To Wheel Of Success",
-    "Tough Cookie",
-    "One in a million",
-    "Too Long",
-    "Stay Positive"
-];
+const phrases = ["welcome to command line"];
 
 function getRandomPhraseAsArray(arr) {
     const randomPhrase = Math.floor(Math.random() * arr.length);
